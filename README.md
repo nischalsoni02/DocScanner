@@ -58,30 +58,30 @@ MONGODB_URI=your_mongodb_uri (optional)
 ###3️⃣ Run the backend
 cd server
 node index.js
----
 
 Backend runs at: http://localhost:5000
 
 Health check: http://localhost:5000/api/health
+---
 
-4️⃣ Run the frontend
+###4️⃣ Run the frontend
+
 cd ..
+
 npm run client
 
 
 Frontend runs at: http://localhost:5173
+---
 
-📄 Supported Files
-
+###📄 Supported Files
 PDF
-
 JPEG, JPG
-
 PNG
 (Max size: 10MB)
+---
 
-🔧 Notes
-
+###🔧 Notes
 ✅ Works with or without MongoDB
 
 ⏳ AI processing may take a few seconds for large documents
@@ -91,3 +91,4 @@ PNG
 🎯 Drag-and-drop interface for easy uploads
 
 📋 Copy button available for summaries and key points
+---
