@@ -37,7 +37,7 @@ function App() {
       // Simulate stage progression with realistic timing
       setTimeout(() => setProcessingStage('extracting'), 800);
       
-      const response = await fetch('http://localhost:5000/api/upload', {
+      const response = await fetch('https://docscanner-dk5o.onrender.com', {
         method: 'POST',
         body: formData,
       });
