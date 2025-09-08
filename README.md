@@ -79,7 +79,7 @@ node index.js
 
 ```bash
 cd ..
-npm run dev
+npm run client
 ```
 
 - Frontend runs at: http://localhost:5173
