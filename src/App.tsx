@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Brain, Github, AlertCircle, Settings } from 'lucide-react';
+import { FileText, Brain, Github, AlertCircle, Zap, Settings } from 'lucide-react';
 import FileUpload from './components/FileUpload';
 import SummaryDisplay from './components/SummaryDisplay';
 import ProcessingStatus from './components/ProcessingStatus';
@@ -27,34 +27,38 @@ function App() {
     setIsProcessing(true);
     setError('');
     setDocumentData(null);
-
+    
     try {
       setProcessingStage('uploading');
-
+      
       const formData = new FormData();
       formData.append('document', file);
-
+      
+      // Simulate stage progression with realistic timing
       setTimeout(() => setProcessingStage('extracting'), 800);
-
+      
       const response = await fetch('http://localhost:5000/api/upload', {
         method: 'POST',
         body: formData,
       });
-
+      
+      // Move to AI summarization stage
       setTimeout(() => setProcessingStage('summarizing'), 1500);
-
+      
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Upload failed');
       }
-
+      
       const result = await response.json();
-
+      
+      // Complete processing
       setTimeout(() => {
         setProcessingStage('complete');
         setDocumentData(result);
         setIsProcessing(false);
       }, 2000);
+      
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unexpected error occurred');
       setIsProcessing(false);
@@ -69,34 +73,48 @@ function App() {
   };
 
   return (
+    // <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
     <div className="min-h-screen bg-gradient-to-br from-[#343541] via-[#40414F] to-[#343541]">
-      <header className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-3 rounded-xl shadow-lg">
-              <Brain className="w-8 h-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                DOC_SCANNER
-              </h1>
-              <p className="text-sm text-gray-200 font-medium">
-                AI-Powered Document Summarizer
-              </p>
-            </div>
-          </div>
-          <a
-            href="https://github.com/nischalsoni02/DOC_SCANNER"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 p-2 text-gray-200 hover:text-white transition-colors rounded-lg hover:bg-gray-800"
-          >
-            <Github className="w-5 h-5" />
-            <span className="text-sm font-medium">View Code</span>
-          </a>
-        </div>
-      </header>
 
+      {/* Header */}
+      <header className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-md sticky top-0 z-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div className="flex items-center justify-between">
+      <div className="flex items-center space-x-4">
+        <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-3 rounded-xl shadow-lg">
+          <Brain className="w-8 h-8 text-white" />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            DOC_SCANNER
+          </h1>
+          <div className="flex items-center space-x-2">
+           
+            <p className="text-sm text-gray-200 font-medium">
+              AI-Powered Document Summarizer
+            </p>
+          </div>
+        </div>
+      </div>
+     
+      <div className="flex items-center space-x-4">
+  <a 
+    href="https://github.com/nischalsoni02/DocScanner" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className="flex items-center space-x-2 p-2 text-gray-200 hover:text-white transition-colors rounded-lg hover:bg-gray-800"
+  >
+    <Github className="w-5 h-5" />
+    <span className="text-sm font-medium">View Code</span>
+  </a>
+</div>
+
+    </div>
+  </div>
+</header>
+
+
+      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {error && (
           <div className="mb-8 bg-red-50 border border-red-200 rounded-xl p-6 shadow-sm">
@@ -117,41 +135,47 @@ function App() {
         )}
 
         {!documentData && !isProcessing && !error && (
-          <div className="text-center mb-12">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-full w-20 h-20 mx-auto mb-6 shadow-lg">
-              <FileText className="w-12 h-12 text-white" />
-            </div>
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent mb-4">
-              Summarize Smarter, Not Harder
-            </h2>
-            <p className="text-gray-300 max-w-3xl mx-auto text-lg leading-relaxed">
-              Upload a PDF or image document to get an AI-powered summary. Our system extracts the text, analyzes the content, and generates intelligent summaries with key insights to help you quickly understand your document.
-            </p>
+         <div className="text-center mb-12">
+          <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-full w-20 h-20 mx-auto mb-6 shadow-lg">
+             <FileText className="w-12 h-12 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent mb-4">
+  Summarize Smarter, Not Harder
+</h2>
+
+              <p className="text-gray-300 max-w-3xl mx-auto text-lg leading-relaxed">
+              Upload a PDF or image document to get an AI-powered summary. 
+              Our system extracts the text, analyzes the content, and generates intelligent 
+              summaries with key insights to help you quickly understand your document.
+              </p>
+            
+            {/* Features Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto">
-              <div className="bg-gradient-to-br from-blue-100 to-blue-50 rounded-xl p-6 shadow-md border border-blue-200 hover:scale-105 transform transition-all duration-300">
-                <div className="bg-blue-200 p-3 rounded-lg w-12 h-12 mx-auto mb-4">
-                  <FileText className="w-6 h-6 text-blue-700" />
-                </div>
-                <h3 className="font-semibold text-gray-800 mb-2">Smart Extraction</h3>
-                <p className="text-sm text-gray-600">PDF parsing and OCR for images with high accuracy</p>
-              </div>
+  <div className="bg-gradient-to-br from-blue-100 to-blue-50 rounded-xl p-6 shadow-md border border-blue-200 hover:scale-105 transform transition-all duration-300">
+    <div className="bg-blue-200 p-3 rounded-lg w-12 h-12 mx-auto mb-4">
+      <FileText className="w-6 h-6 text-blue-700" />
+    </div>
+    <h3 className="font-semibold text-gray-800 mb-2">Smart Extraction</h3>
+    <p className="text-sm text-gray-600">PDF parsing and OCR for images with high accuracy</p>
+  </div>
 
-              <div className="bg-gradient-to-br from-purple-100 to-purple-50 rounded-xl p-6 shadow-md border border-purple-200 hover:scale-105 transform transition-all duration-300">
-                <div className="bg-purple-200 p-3 rounded-lg w-12 h-12 mx-auto mb-4">
-                  <Brain className="w-6 h-6 text-purple-700" />
-                </div>
-                <h3 className="font-semibold text-gray-800 mb-2">AI Analysis</h3>
-                <p className="text-sm text-gray-600">AI-powered intelligent summarization</p>
-              </div>
+  <div className="bg-gradient-to-br from-purple-100 to-purple-50 rounded-xl p-6 shadow-md border border-purple-200 hover:scale-105 transform transition-all duration-300">
+    <div className="bg-purple-200 p-3 rounded-lg w-12 h-12 mx-auto mb-4">
+      <Brain className="w-6 h-6 text-purple-700" />
+    </div>
+    <h3 className="font-semibold text-gray-800 mb-2">AI Analysis</h3>
+    <p className="text-sm text-gray-600">AI-powered intelligent summarization</p>
+  </div>
 
-              <div className="bg-gradient-to-br from-green-100 to-green-50 rounded-xl p-6 shadow-md border border-green-200 hover:scale-105 transform transition-all duration-300">
-                <div className="bg-green-200 p-3 rounded-lg w-12 h-12 mx-auto mb-4">
-                  <Settings className="w-6 h-6 text-green-700" />
-                </div>
-                <h3 className="font-semibold text-gray-800 mb-2">Multiple Formats</h3>
-                <p className="text-sm text-gray-600">Key points, Short, medium, and detailed summary options</p>
-              </div>
-            </div>
+  <div className="bg-gradient-to-br from-green-100 to-green-50 rounded-xl p-6 shadow-md border border-green-200 hover:scale-105 transform transition-all duration-300">
+    <div className="bg-green-200 p-3 rounded-lg w-12 h-12 mx-auto mb-4">
+      <Settings className="w-6 h-6 text-green-700" />
+    </div>
+    <h3 className="font-semibold text-gray-800 mb-2">Multiple Formats</h3>
+    <p className="text-sm text-gray-600">Key points, Short, medium, and detailed summary options</p>
+  </div>
+</div>
+
           </div>
         )}
 
@@ -176,13 +200,16 @@ function App() {
         )}
       </main>
 
-      <footer className="bg-gray-900 text-gray-200 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-          <p className="font-semibold text-lg mb-2">Project Created by NISCHAL SONI</p>
-          <p className="text-sm mb-1">Intelligent Document Analysis & Summaries</p>
-          <p className="text-sm">Powered with AI & Modern Web Technologies</p>
-        </div>
-      </footer>
+      {/* Footer */}
+     <footer className="bg-gray-900 text-gray-200 mt-16">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+    <p className="font-semibold text-lg mb-2">Project Created by NISCHAL SONI</p>
+    <p className="text-sm mb-1"> Intelligent Document Analysis & Summaries</p>
+    <p className="text-sm"> Powered with AI & Modern Web Technologies</p>
+  </div>
+</footer>
+
+
     </div>
   );
 }
