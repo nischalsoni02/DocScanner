@@ -39,8 +39,8 @@ Doc_Scanner/
 │ ├── FileUpload.tsx
 │ ├── ProcessingStatus.tsx
 │ └── SummaryDisplay.tsx
+---
 
-## ⚡ Getting Started
 
 ### 1️⃣ Install dependencies
 ```bash
@@ -60,10 +60,10 @@ cd server
 node index.js
 
 Backend runs at: http://localhost:5000
-
-Health check: http://localhost:5000/api/health
 ---
+Health check: http://localhost:5000/api/health
 
+---
 ###4️⃣ Run the frontend
 
 cd ..
@@ -91,4 +91,4 @@ PNG
 🎯 Drag-and-drop interface for easy uploads
 
 📋 Copy button available for summaries and key points
----
+
