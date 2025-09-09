@@ -54,6 +54,8 @@ Doc_Scanner/
 
 ### Clone this repo
 I have deployed my server on render : https://docscanner-dk5o.onrender.com
+---
+
 If you want to run locally after cloning, update the fetch API URLs in App.tsx to point to your backend’s local port (eg: Replace https://docscanner-dk5o.onrender.com/api/upload  with  http://localhost:5000/api/upload).
 
 ### 1️⃣ Install dependencies
