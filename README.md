@@ -1,9 +1,10 @@
 # 📄 Doc_Scanner - AI-Powered Document Analysis
 
 A full-stack **MERN app** that extracts text from PDFs/images and generates AI summaries using **Google Gemini AI**.
+
+---
 **Deployed URL: ** https://doc-scanner-opal.vercel.app/
 ---
-
 ## 🔹 Features
 
 - 📂 Upload PDF or image (**JPEG, JPG, PNG**) via drag-and-drop or file picker  
