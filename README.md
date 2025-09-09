@@ -6,7 +6,7 @@ A full-stack **MERN app** that extracts text from PDFs/images and generates AI s
 **Deployed URL: ** https://doc-scanner-opal.vercel.app/
 ---
 ---
-**Write-up: ** https://doc-scanner-opal.vercel.app/](https://drive.google.com/file/d/12N4WwUSDnKIeasFURHFRGfoJMHv7phwp/view?usp=sharing
+**Write-up: ** https://drive.google.com/file/d/12N4WwUSDnKIeasFURHFRGfoJMHv7phwp/view?usp=sharing
 ---
 ## 🔹 Features
 
